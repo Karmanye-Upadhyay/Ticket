@@ -1,0 +1,229 @@
+<div>
+  <div class="ticket-form">
+    <h2>Create New Ticket</h2>
+    <form [formGroup]="loginForm" (submit)="onSubmit()">
+      <div style="display: flex; justify-content: space-between">
+        <div class="form-group" style="margin-right: 200px">
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input
+              matInput
+              formControlName="ticket_Name"
+              name="ticket_Name"
+              rows="1"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="fill">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category" name="category">
+              <mat-option>None</mat-option>
+              <mat-option value="Billing">Billing</mat-option>
+              <mat-option value="Medical">Medical Care</mat-option>
+              <mat-option value="Communication">Communication</mat-option>
+              <!-- Add more options as needed -->
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-right: 200px">
+        <label>Priority Level:</label><br />
+        <mat-radio-group formControlName="priority_Level" name="priority_Level">
+          <mat-radio-button value="low">Low</mat-radio-button>
+          <mat-radio-button value="medium">Medium</mat-radio-button>
+          <mat-radio-button value="high">High</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="form-group" style="max-width: 600px">
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Issue</mat-label>
+          <textarea 
+          style="width: 569px;"
+            matInput
+            formControlName="issues"
+            name="issues"
+            rows="4"
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group" style="display: flex">
+        <label  for="attachment_Name">Attachment:</label>
+        <input
+        
+          #attachmentInput
+          (change)="handalImageUpload($event)"
+          type="file"
+          
+
+          id="attachment_Name"
+          multiple
+          name="attachment_Name"
+        />
+        <div *ngIf="edit ">
+          <div *ngFor="let editimage of editImageArry">
+            <img 
+            [src]="editimage"
+            style="height: 30px; width: 50px; margin-top: 5px"
+            alt=""
+          />
+          <button
+          style="
+            background: none;
+            border: none;
+            padding: 0;
+            margin-left: 20px;
+           font-size: 20px;
+            color: red;
+          "
+           #attachmentInput
+          (click)="deleteImage(editimage)"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+          </div>
+        </div>
+        
+        <div *ngFor="let image of selectedImages">
+          <img
+          
+            [src]="image"
+            style="height: 30px; width: 50px; margin-top: 5px"
+            alt=""
+          />
+          <button
+            style="
+              background: none;
+              border: none;
+              padding: 0;
+              margin-left: 20px;
+             font-size: 20px;
+              color: red;
+            "
+
+            (click)="deleteImage(image)"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <!-- 
+
+        <button (click)="uploadFiles()">Upload</button>
+      <td mat-cell *matCellDef="let element">
+        <img
+          [src]="element.imageByte"
+          style="height: 30px; width: 50px; margin-top: 5px"
+          alt=""
+        />
+      </td> -->
+      </div>
+
+      <button
+        style="
+          margin: 30px auto; /* Center horizontally with auto margins */
+          display: block; /* Make button a block-level element */
+          align-items: center;
+          align-content: center;
+        "
+        type="submit"
+        [disabled]="!loginForm.valid"
+        mat-raised-button
+        color="primary"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+
+<br />
+<br />
+<br />
+
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+
+<div class="mb-5 mt-2">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let element">{{ element.ticket_Id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.ticket_Name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef>Category</th>
+      <td mat-cell *matCellDef="let element">{{ element.category }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="priority">
+      <th mat-header-cell *matHeaderCellDef>Priority</th>
+      <td mat-cell *matCellDef="let element">{{ element.priority_Level }}</td>
+    </ng-container>
+    <ng-container matColumnDef="issue">
+      <th mat-header-cell *matHeaderCellDef>Issue</th>
+      <td mat-cell *matCellDef="let element">{{ element.issues }}</td>
+    </ng-container>
+    <ng-container matColumnDef="attachment">
+      <th mat-header-cell *matHeaderCellDef>Attachment</th>
+
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="element.multiAttachmentDtos">
+          <button mat-raised-button (click)="downloadImagesHandler(element)">
+            <i class="fa-solid fa-download"></i>
+          </button>
+          <!-- <div *ngFor="let attachment of element.multiAttachmentDtos; let i = index">
+            <button (click)="download(attachment.attachment_Name, i)"
+                    style="background: none; border: none; padding: 0; cursor: pointer;">
+              <img 
+                [src]="attachment.attachment_Name"
+                style="height: 30px; width: 50px; margin-top: 5px;"
+                alt=""
+              >
+            </button>
+          </div> -->
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let element">{{ element.ticket_Status }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="comment">
+      <th mat-header-cell *matHeaderCellDef>Comment</th>
+      <td mat-cell *matCellDef="let element">{{ element.comment }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let element">
+        <a class="styleicon mousehover" (click)="removeTicket(element)">
+          <i class="fa-solid fa-trash"></i>
+        </a>
+        <a class="styleicon mousehover editb" (click)="editTicket(element)"
+          ><i class="fa-regular fa-pen-to-square"> </i>
+        </a>
+
+        <button
+          class="styleicon mousehover"
+          mat-raised-button
+          (click)="openDialog(element)"
+        >
+          <i class="fa-regular fa-comment-dots"></i>
+        </button>
+
+        <!-- <a    class="styleicon mousehover" (click)="commentTicket(element)"> -->
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

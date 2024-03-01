@@ -1,0 +1,48 @@
+<div class="row px-0 mx-0">
+  <div
+    class="col-12 p-2 heading"
+    style="display: flex; justify-content: center"
+  >
+    <h1>Submit</h1>
+  </div>
+  <form [formGroup]="loginForm" (submit)="saveCommentHandler()">
+    <div class="form-group col-12" style="margin-top: -9px">
+      <mat-radio-group
+        formControlName="ticket_Status"
+        name="ticket_Status"
+        aria-label="Select an option"
+      >
+        <mat-radio-button value="Pending">Pending</mat-radio-button>
+        <mat-radio-button value="InProcess">InProcess</mat-radio-button>
+        <mat-radio-button value="Completed">Completed</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="col-12 mt-2"><h1>Comment</h1></div>
+    <div class="form-group col-12">
+      <mat-form-field
+        class="example-full-width"
+        style="width: 100%; margin-top: -6px"
+      >
+        <mat-label>Leave a comment</mat-label>
+        <textarea
+          matInput
+          formControlName="comment"
+          name="comment"
+          placeholder="Ex. It makes me feel..."
+        ></textarea>
+      </mat-form-field>
+    </div>
+  </form>
+  <div class="col-12" style="display: flex; justify-content: end">
+    <div style="margin-right: 10px">
+      <button mat-raised-button color="warn" mat-dialog-close>close</button>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" (click)="saveCommentHandler()">
+        save
+      </button>
+    </div>
+  </div>
+</div>
+<!-- style="border: none; font-size: 21px; " -->

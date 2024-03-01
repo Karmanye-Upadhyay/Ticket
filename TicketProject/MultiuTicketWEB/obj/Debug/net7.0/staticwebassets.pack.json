@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\karmanyeupadhyay.SDEICHD0\\Desktop\\Project Till Date\\Project\\TicketProject\\MultiuTicketWEB\\wwwroot\\Images\\Multi\\BatManImagecode13.jpg",
+      "PackagePath": "staticwebassets\\Images\\Multi\\BatManImagecode13.jpg"
+    },
+    {
+      "Id": "C:\\Users\\karmanyeupadhyay.SDEICHD0\\Desktop\\Project Till Date\\Project\\TicketProject\\MultiuTicketWEB\\wwwroot\\Images\\Multi\\BatManImagecode28.jpg",
+      "PackagePath": "staticwebassets\\Images\\Multi\\BatManImagecode28.jpg"
+    },
+    {
+      "Id": "C:\\Users\\karmanyeupadhyay.SDEICHD0\\Desktop\\Project Till Date\\Project\\TicketProject\\MultiuTicketWEB\\wwwroot\\Images\\Multi\\fireTreeImagecode13.jpg",
+      "PackagePath": "staticwebassets\\Images\\Multi\\fireTreeImagecode13.jpg"
+    },
+    {
+      "Id": "C:\\Users\\karmanyeupadhyay.SDEICHD0\\Desktop\\Project Till Date\\Project\\TicketProject\\MultiuTicketWEB\\wwwroot\\Images\\Multi\\fireTreeImagecode28.jpg",
+      "PackagePath": "staticwebassets\\Images\\Multi\\fireTreeImagecode28.jpg"
+    },
+    {
+      "Id": "C:\\Users\\karmanyeupadhyay.SDEICHD0\\Desktop\\Project Till Date\\Project\\TicketProject\\MultiuTicketWEB\\wwwroot\\Images\\Multi\\treeiamgecode13.jpg",
+      "PackagePath": "staticwebassets\\Images\\Multi\\treeiamgecode13.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.MultiuTicketWEB.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.MultiuTicketWEB.props",
+      "PackagePath": "build\\MultiuTicketWEB.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.MultiuTicketWEB.props",
+      "PackagePath": "buildMultiTargeting\\MultiuTicketWEB.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.MultiuTicketWEB.props",
+      "PackagePath": "buildTransitive\\MultiuTicketWEB.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
